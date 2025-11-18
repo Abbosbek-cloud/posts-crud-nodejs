@@ -15,15 +15,8 @@ const userValidators = {
       .isLength({
         min: 3,
         max: 32,
-      });
-
-    // check if password exist and has enough length
-    req.check("password", "Password is required").notEmpty();
-    req
-      .check("password", "Password must be at least 6 characters long")
-      .isLength({
-        min: 6,
-      });
+      })
+      .optional();
 
     // check for errors
     const errors = req.validationErrors();

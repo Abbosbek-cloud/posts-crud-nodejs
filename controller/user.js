@@ -15,6 +15,7 @@ const userController = {
     const userId = req.params.id;
 
     User.findById(userId)
+      .select("id name email")
       .then((user) => {
         if (!user) {
           return res.status(404).json({
@@ -34,14 +35,22 @@ const userController = {
     const userId = req.params.id;
     const updatedData = req.body;
 
+    console.log(updatedData);
+
     User.findByIdAndUpdate(userId, updatedData, { new: true })
       .then((user) => {
         res.json({
           message: "User updated successfully",
-          user: user,
+          user: {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+          },
         });
       })
       .catch((err) => {
+        console.log(err);
+
         res.json({ error: err });
       });
   },
