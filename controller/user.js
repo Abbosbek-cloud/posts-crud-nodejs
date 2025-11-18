@@ -35,8 +35,6 @@ const userController = {
     const userId = req.params.id;
     const updatedData = req.body;
 
-    console.log(updatedData);
-
     User.findByIdAndUpdate(userId, updatedData, { new: true })
       .then((user) => {
         res.json({
